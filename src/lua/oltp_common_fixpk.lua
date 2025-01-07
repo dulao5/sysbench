@@ -195,7 +195,7 @@ CREATE TABLE sbtest%d(
   k INTEGER DEFAULT '0' NOT NULL,
   c CHAR(120) DEFAULT '' NOT NULL,
   pad CHAR(60) DEFAULT '' NOT NULL,
-  %s (id)
+  %s (k, id)
 ) %s %s]],
       table_num, id_def, id_index_def, engine_def,
       sysbench.opt.create_table_options)

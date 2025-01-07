@@ -6,7 +6,7 @@
 -- http://kb.askmonty.org/v/segmented-key-cache
 --
 
-require("oltp_common")
+require("oltp_common_fixpk")
 
 -- Add random_points to the list of standard OLTP options
 sysbench.cmdline.options.random_points =
