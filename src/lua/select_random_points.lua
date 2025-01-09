@@ -11,6 +11,9 @@ require("oltp_common")
 -- Add random_points to the list of standard OLTP options
 sysbench.cmdline.options.random_points =
    {"Number of random points in the IN() clause in generated SELECTs", 10}
+-- Add act_rows to the list of standard OLTP options
+sysbench.cmdline.options.act_rows =
+   {"Number of random points in the LIMIT ? clause in generated SELECTs", 10}
 
 -- Override standard prepare/cleanup OLTP functions, as this benchmark does not
 -- support multiple tables
@@ -38,8 +41,8 @@ function thread_init()
    stmt = con:prepare(string.format([[
         SELECT id, k, c, pad
           FROM sbtest1
-          WHERE k IN (%s)
-        ]], points))
+          WHERE k IN (%s) LIMIT %s
+        ]], points, sysbench.opt.act_rows ))
 
    params = {}
    for j = 1, sysbench.opt.random_points do
